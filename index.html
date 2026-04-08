@@ -1,0 +1,1828 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Evgenii Shlomov — Robotics Engineer</title>
+  <meta name="description" content="Robotics engineer portfolio: projects, experience, skills and contacts"/>
+  <meta name="robots" content="index,follow"/>
+  <link rel="alternate" hreflang="en" href="index.html"/>
+  <link rel="alternate" hreflang="en" href="index_ru.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #FAF8F4;
+      --bg2: #F2EFE8;
+      --bg3: #EBE7DE;
+      --fg: #1A1A18;
+      --fg2: #3D3D3A;
+      --muted: #7A7A72;
+      --faint: #B0AFA8;
+      --line: #DDD9CF;
+      --accent: #E8652A;
+      --accent-soft: rgba(232,101,42,0.08);
+      --accent-med: rgba(232,101,42,0.15);
+      --accent2: #D44F18;
+      --card: rgba(255,255,255,0.65);
+      --card-hover: rgba(255,255,255,0.9);
+      --tag-bg: #F2EFE8;
+      --tag-fg: #5A5A54;
+      --shadow: 0 1px 3px rgba(26,26,24,0.04), 0 6px 24px rgba(26,26,24,0.06);
+      --shadow-lg: 0 4px 12px rgba(26,26,24,0.06), 0 16px 48px rgba(26,26,24,0.1);
+      --r: 14px;
+      --r-sm: 8px;
+      --max: 920px;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'Onest', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0E0F13;
+      --bg2: #16171D;
+      --bg3: #1E1F27;
+      --fg: #ECEAE4;
+      --fg2: #C8C6BE;
+      --muted: #8A897F;
+      --faint: #555550;
+      --line: #2A2B33;
+      --accent: #F07A3A;
+      --accent-soft: rgba(240,122,58,0.1);
+      --accent-med: rgba(240,122,58,0.18);
+      --accent2: #FF9155;
+      --card: rgba(22,23,29,0.75);
+      --card-hover: rgba(30,31,39,0.95);
+      --tag-bg: #1E1F27;
+      --tag-fg: #9A998F;
+      --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 6px 24px rgba(0,0,0,0.15);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,0.2), 0 16px 48px rgba(0,0,0,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent2); }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(16px) saturate(1.5);
+      -webkit-backdrop-filter: blur(16px) saturate(1.5);
+      background: rgba(250,248,244,0.8);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.4s;
+    }
+    [data-theme="dark"] .topbar { background: rgba(14,15,19,0.85); }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--fg);
+      letter-spacing: -0.3px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); background: var(--accent-soft); text-decoration: none; }
+
+    .lang-pill {
+      display: flex;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 10px;
+      background: var(--bg2);
+      margin-left: 8px;
+    }
+    .lang-pill a {
+      display: block;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .lang-pill a.active {
+      color: var(--fg);
+      background: var(--card-hover);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .theme-toggle {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      transition: all 0.2s;
+      margin-left: 4px;
+      color: var(--muted);
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 60px 0 48px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .hero-avatar {
+      width: 200px;
+      height: 240px;
+      border-radius: var(--r);
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+    }
+    .hero-content { min-width: 0; }
+
+    .hero-name {
+      font-family: var(--font-head);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 6px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-pitch {
+      color: var(--fg2);
+      max-width: 56ch;
+      margin-bottom: 20px;
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .hero-contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg2);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .hero-contacts a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+      text-decoration: none;
+    }
+    .hero-contacts a svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .hero-cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--accent2); color: #fff; text-decoration: none; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      color: var(--fg2);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ── Highlights strip ── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding-bottom: 48px;
+    }
+    .hl-card {
+      padding: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s;
+    }
+    .hl-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .hl-num {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hl-label {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* ── Sections ── */
+    section { padding: 36px 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+      margin-left: 8px;
+    }
+
+    /* ── Project Cards ── */
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: var(--card);
+      margin-bottom: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+    .project-card:hover { border-color: color-mix(in srgb, var(--line) 50%, var(--accent)); }
+    .project-card[open] { background: var(--card-hover); box-shadow: var(--shadow); }
+
+    .project-summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    .project-summary::-webkit-details-marker { display: none; }
+    .project-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--r); }
+
+    .psum-left { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .psum-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px 12px;
+    }
+    .psum-name {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .psum-meta {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+    .psum-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      overflow: hidden;
+      max-height: 24px;
+    }
+    .project-card[open] .psum-tags { max-height: none; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--tag-fg);
+      background: var(--tag-bg);
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .tag-accent {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .psum-chevron {
+      color: var(--faint);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .project-card[open] .psum-chevron { transform: rotate(180deg); }
+
+    .project-body {
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-story {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .story-block {
+      padding: 14px;
+      background: var(--bg2);
+      border-radius: var(--r-sm);
+      border-left: 3px solid var(--accent);
+    }
+    .story-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .story-text {
+      font-size: 13.5px;
+      color: var(--fg2);
+      line-height: 1.5;
+    }
+
+    .project-section-title {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 700;
+      margin: 18px 0 8px;
+      color: var(--fg);
+    }
+
+    .contrib-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contrib-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: var(--fg2);
+      line-height: 1.5;
+    }
+    .contrib-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .project-kv {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 6px 12px;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .project-kv .k {
+      font-weight: 600;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    .project-kv .v { color: var(--fg2); }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      border: 1px solid var(--accent-med);
+      transition: all 0.2s;
+    }
+    .project-links a:hover { background: var(--accent-med); text-decoration: none; }
+    .project-links a svg { width: 13px; height: 13px; }
+
+    /* ── Gallery ── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .gallery figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      background: var(--bg2);
+      transition: border-color 0.2s;
+    }
+    .gallery figure:hover { border-color: var(--accent); }
+    .gallery .media {
+      width: 100%;
+      height: 160px;
+      display: block;
+      object-fit: cover;
+      background: var(--bg3);
+    }
+    .gallery figcaption {
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Experience cards ── */
+    .exp-card {
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: var(--card);
+      margin-bottom: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+    .exp-card:hover { border-color: color-mix(in srgb, var(--line) 50%, var(--accent)); }
+    .exp-card[open] { background: var(--card-hover); box-shadow: var(--shadow); }
+    .exp-card summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .exp-card summary::-webkit-details-marker { display: none; }
+    .exp-body { padding: 0 20px 16px; border-top: 1px solid var(--line); }
+    .exp-body ul { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .exp-body li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: var(--fg2);
+      line-height: 1.5;
+    }
+    .exp-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .exp-body p { font-size: 14px; color: var(--fg2); margin-top: 10px; line-height: 1.6; }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .skill-group {
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s;
+    }
+    .skill-group:hover { border-color: var(--accent); }
+    .skill-group-title {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .skill-group-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .skill-tag {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--fg2);
+      background: var(--bg2);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Education & Awards ── */
+    .edu-card {
+      padding: 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      margin-bottom: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .edu-title {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .edu-sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+    .edu-detail { font-size: 14px; color: var(--fg2); margin-top: 8px; }
+
+    .awards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .award-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s;
+    }
+    .award-item:hover { border-color: var(--accent); }
+    .award-year {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .award-text { font-size: 13.5px; color: var(--fg2); line-height: 1.45; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer a { color: var(--muted); }
+    .footer a:hover { color: var(--accent); }
+
+    /* ── Mini-projects ── */
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .mini-card {
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .mini-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .mini-card a { color: var(--fg); font-size: 13.5px; font-weight: 600; }
+    .mini-card a:hover { color: var(--accent); text-decoration: none; }
+    .mini-card p { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero-avatar { width: 140px; height: 170px; }
+      .hero-name { font-size: 30px; }
+      .highlights { grid-template-columns: repeat(2, 1fr); }
+      .project-story { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .project-kv { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name { font-size: 26px; }
+      .highlights { grid-template-columns: 1fr; }
+    }
+
+    /* ── Animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in {
+        opacity: 0;
+        transform: translateY(16px);
+        animation: fadeUp 0.6s ease forwards;
+      }
+      @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .delay-1 { animation-delay: 0.1s; }
+      .delay-2 { animation-delay: 0.2s; }
+      .delay-3 { animation-delay: 0.3s; }
+      .delay-4 { animation-delay: 0.4s; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .topbar, .theme-toggle, .lang-pill, .hero-cta { display: none !important; }
+      body { background: #fff; font-size: 12px; }
+      .project-card, .exp-card { break-inside: avoid; }
+      .project-card[open], .exp-card[open] { background: transparent; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Top bar ── -->
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <span class="logo">E.Shlomov</span>
+      <div class="topbar-right">
+        <div class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#leadership">Leadership</a>
+          <a href="#skills">Skills</a>
+        </div>
+        <div class="lang-pill">
+          <a href="index.html" class="active">EN</a>
+          <a href="index_ru.html">RU</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span id="theme-icon">&#9789;</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ── Hero ── -->
+    <header class="hero fade-in">
+      <div class="hero-grid">
+        <img class="hero-avatar" src="assets/media/avatar.jpg" alt="Photo: Evgenii Shlomov" loading="lazy"/>
+        <div class="hero-content">
+          <h1 class="hero-name">Evgenii Shlomov</h1>
+          <p class="hero-tagline">Robotics · ROS2 · Navigation · Manipulation · Computer Vision</p>
+          <p class="hero-pitch">
+            Robotics engineer and undergraduate at Innopolis University. I lead the student robotics lab, design and develop robotic systems — from autonomous mobile platforms with Nav2 to voice-controlled collaborative manipulators. Experienced in industrial robotics, computer vision, and team management.
+          </p>
+
+          <div class="hero-contacts">
+            <a href="mailto:e.shlomov@innopolis.university">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7L12 13 2 7"/></svg>
+              Email
+            </a>
+            <a href="https://t.me/mook003" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 5L2 12.5l7 2M21 5l-4 16-8-8.5M21 5L9 14.5"/></svg>
+              @mook003
+            </a>
+            <a href="https://github.com/mook003" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/evgenii-shlomov" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn-primary" href="assets/cv_1page.pdf" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download CV
+            </a>
+            <a class="btn-secondary" href="assets/cv_full.pdf" target="_blank">Full CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Highlights ── -->
+    <div class="highlights fade-in delay-1">
+      <div class="hl-card">
+        <div class="hl-num">20+</div>
+        <div class="hl-label">engineering &amp; R&amp;D projects</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-num">4.83</div>
+        <div class="hl-label">GPA · Innopolis University</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-num">80+</div>
+        <div class="hl-label">robotics lab members</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-num">2200+</div>
+        <div class="hl-label">people reached through community events</div>
+      </div>
+    </div>
+
+    <main>
+
+
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- EXPERIENCE -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="experience">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Work Experience</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <details class="exp-card" open>
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Industrial Robotics Development Center of Innopolis University, Technology Solutions Department</span>
+                <span class="psum-meta">Jan 2025–present · Software Engineer</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">Motion Planning, MoveIt</span>
+                <span class="tag tag-accent">CAD</span>
+                <span class="tag tag-accent">ROS2</span>
+                <span class="tag tag-accent">Industrial Manipulators</span>
+                <span class="tag tag-accent">Point Cloud Processing</span>
+                <span class="tag">Computer Vision</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p> R&amp;D departments for cladding and welding — developing robotic systems for automated metal 3D printing (Direct Metal Deposition, DMD) and multi-robot welding.</p>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Designed control interfaces for a Kawasaki industrial manipulator</li>
+              <li>Developed ROS 2 packages for controlling industrial and collaborative manipulators</li>
+              <li>Created 3D equipment models and URDF descriptions for software integration</li>
+              <li>Designed CAD parts for mounting peripherals and auxiliary tools</li>
+              <li>Docker deployment and bringup files for reproducibility</li>
+            </ul>
+
+            <div class="project-section-title">Special projects</div>
+            <ul class="contrib-list">
+              <li><a href="#projects">Robot Inspection Library</a> — library for evaluating industrial robot accuracy and repeatability (see Projects section)</li>
+              <li><a href="#projects">Robot Inspector</a> — manipulator inspection tool based on laser tracker data (see Projects section)</li>
+            </ul>
+          </div>
+        </details>
+        <details class="exp-card" open>
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Innopolis University AI Institute</span>
+                <span class="psum-meta">Nov 2025–present · Research Programmer</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">MAPF</span>
+                <span class="tag tag-accent">Computer vision</span>
+                <span class="tag tag-accent">World models</span>
+                <span class="tag tag-accent">VLA</span>
+                <span class="tag tag-accent">KUKA LBR iiwa, UR10e, Franka Emika Panda</span>
+                <span class="tag">LLM</span>
+                <span class="tag">Robot swarm</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p>As part of the AI Institute's research activities, I assembled and led a student team of 8 people to work on two projects:</p>
+
+            <div class="project-section-title">Research directions</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+              <div class="story-block" style="max-width:100%;">
+                <div class="story-label">LLM-Swarm project</div>
+                <div class="story-text">Developing swarm control algorithms: classical navigation + LLM for global planning. Details — <a href="#projects">LLM Swarm Control</a> in the Projects section.</div>
+              </div>
+              <div class="story-block" style="max-width:100%;">
+                <div class="story-label">Robot Assistant project</div>
+                <div class="story-text">Exploring VLA and World Models for controlling collaborative manipulators (KUKA LBR iiwa, UR10e, Franka Emika Panda). Details — <a href="#projects">UR10e Voice Assistant</a> in the Projects section.</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My role</div>
+            <ul class="contrib-list">
+              <li>Built and led a team of 8: task distribution, regular meetings, mentorship</li>
+              <li>Coordinated with research supervisors and managed the research agenda</li>
+              <li>Technical leadership across both tracks: system architecture, code review, integration</li>
+            </ul> 
+
+          </div>
+        </details>
+
+      </section>
+
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- PROJECTS -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="projects">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Selected Projects</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <!-- ── P1: UR10 Voice Assistant ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">UR10e Voice Assistant</span>
+                <span class="psum-meta">2025–present · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">ROS2</span>
+                <span class="tag tag-accent">MoveIt</span>
+                <span class="tag tag-accent">UR10e</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">YOLO</span>
+                <span class="tag">Speech2Text</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">Operating manipulators requires specialized programming skills — operators need a more intuitive interface</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Voice control for a collaborative UR10e: command interpretation, tool detection via CV, planning and safe pick&amp;place execution</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Demo pipeline with robust voice command parsing, object detection, and safety checks before execution</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Team management: meetings, task tracking, mentorship</li>
+              <li>Designed the overall ROS system architecture</li>
+              <li>Built a state machine for recognition, movement, and grasping sequences</li>
+              <li>Integrated UR10e and mechanical gripper via MoveIt motion planning services</li>
+              <li>Created reproducible Docker deployment for amd64 and arm, wrote bringup files</li>
+              <li>Developed CV algorithms for AprilTag recognition and spatial orientation</li>
+              <li>Designed and fabricated peripheral mounts, assembled and wired the hardware</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/Innopolis-Robotics-Society/robot-assistants" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                GitHub
+              </a>
+            </div>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/ra_kinect.jpg" alt="Camera upgrade to Azure Kinect DK"/>
+                <figcaption><span>Azure Kinect DK</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/ra_view.jpg" alt="Test bench overview"/>
+                <figcaption><span>Test bench overview</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none" poster="assets/media/ra_video_poster.jpg">
+                  <source src="assets/media/robot_assistant.MP4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Video demo</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <!-- ── P2: Mobile Robot Platform ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Mobile Robot Platform</span>
+                <span class="psum-meta">2024–2025 · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">ROS2</span>
+                <span class="tag tag-accent">Nav2</span>
+                <span class="tag tag-accent">SLAM</span>
+                <span class="tag tag-accent">Gazebo</span>
+                <span class="tag">Behavior Trees</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">Market demand and Innopolis University Robotics Center request for a mobile logistics platform for warehouse and industrial environments</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Wheeled platform with a full navigation stack: SLAM, motion planning, Behavior Trees, Gazebo simulation, and real-world field testing</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Stable navigation MVP, payload capacity over 100 kg; reproducible launch and tuned parameters for P2P movements</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Team management: meetings, task tracking, mentorship</li>
+              <li>Created URDF/Xacro robot description and integrated into ROS 2</li>
+              <li>Set up Gazebo simulation scenes and configuration</li>
+              <li>Fine-tuned Nav2 and SLAM pipeline using dual-LiDAR data</li>
+              <li>Created reproducible Docker deployment for amd64 and arm (Nvidia Jetson), wrote bringup files</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/Innopolis-Robotics-Society/mobile-platform" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                GitHub
+              </a>
+              <a href="https://drive.google.com/drive/folders/1-FTB3Di2cUiX7x6SxPy-LzDeeiqZODUA" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Test materials
+              </a>
+            </div>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/mp_view.jpeg" alt="Platform overview"/>
+                <figcaption><span>Overview</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/pm_team.jpg" alt="Project team"/>
+                <figcaption><span>Team</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none" poster="assets/media/mp_poster.jpg">
+                  <source src="assets/media/mp_demo.mp4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Public field test</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <!-- ── P3: LLM Swarm ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">LLM Swarm Control</span>
+                <span class="psum-meta">2026–present · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">Gazebo / Stage simulation</span>
+                <span class="tag tag-accent">MAPF</span>
+                <span class="tag tag-accent">Nav2</span>
+                <span class="tag">LLM</span>
+                <span class="tag">Multi-Agent</span>
+                <span class="tag">ROS2</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">Classical swarm control algorithms lack flexibility for autonomous real-world operation</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">LLM for global swarm task planning + classical algorithms ensuring conflict-free paths for each agent + Nav2 for local navigation of 20 robots</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Robot swarm successfully moves in formation, avoids obstacles, and reaches targets via MAPF under LLM planner control</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Team management: meetings, task tracking, mentorship</li>
+              <li>Designed overall project architecture and LLM-to-classical algorithm interface</li>
+              <li>Built a 2D multi-agent simulation and integrated into ROS 2</li>
+              <li>Optimized Nav2 system for simultaneous control of 20 robots</li>
+            </ul>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/swarm_1.jpeg" alt="Robot swarm reached target"/>
+                <figcaption><span>Swarm at target</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/swarm_2.png" alt="Starting configuration visualization"/>
+                <figcaption><span>RViz2 configuration</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none">
+                  <source src="assets/media/swarm_3.mp4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Formation movement</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <!-- ── P4: Unitree A1 ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Unitree A1 Gesture Control</span>
+                <span class="psum-meta">2025 · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">Nvidia Jetson / CUDA</span>
+                <span class="tag tag-accent">Docker</span>
+                <span class="tag">ONNX</span>
+                <span class="tag">YOLO</span>
+                <span class="tag">ROS2</span>
+                <span class="tag">Unitree SDK</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">Controlling a quadruped robot requires specialized input devices — a more intuitive approach is needed</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Gesture recognition via YOLO/ONNX on Nvidia Jetson, translated into movement commands via ROS 2 and Unitree SDK</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Low-latency recognition, stable across varying lighting conditions; containerized ARM deployment</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Team management: meetings, task tracking, mentorship</li>
+              <li>Docker deployment for amd64/arm (Nvidia Jetson), CUDA, ONNX, Unitree SDK</li>
+              <li>Designed overall ROS 2 node architecture and bringup files</li>
+              <li>Implemented ROS 2 nodes and messages for high-level quadruped control</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/Innopolis-Robotics-Society/project_fabian" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                GitHub
+              </a>
+            </div>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/a1_view.jpg" alt="Unitree A1"/>
+                <figcaption><span>Overview</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/a1_test.png" alt="Detection test"/>
+                <figcaption><span>Person detection test</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none" poster="assets/media/a1_poster.png">
+                  <source src="assets/media/a1_demo.mp4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Demo</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+
+        <!-- ── P7: Smart Tank ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Smart Tank for Agricultural Drones</span>
+                <span class="psum-meta">2025 · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">CAD</span>
+                <span class="tag">Electronics</span>
+                <span class="tag">PCB</span>
+                <span class="tag">STM32</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">The client struggled with fluid level measurement due to a wide range of substances including alkaline and acidic media, suspensions, and solutions with large particles</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Reed-switch-based measurement system + STM32 controller; independently designed and fabricated the PCB</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Prototype assembled and validated; highly rated by experts and the client ("Transport of the Future"). Covered by TASS and other media</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Recruited students and organized work within the student team</li>
+              <li>CAD design and fabrication of prototypes</li>
+              <li>Fabricated and assembled a custom PCB with SMD and DIP  components</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://pt.2035.university/project/komanda-105" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                University 2035
+              </a>
+              <a href="https://tass.ru/nauka/25101061" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                TASS
+              </a>
+              <a href="https://media.innopolis.university/news/smart-tank-for-agrodrone/" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Innopolis University
+              </a>              
+            </div>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/bak_0.jpg" alt="Measurement system overview"/>
+                <figcaption><span>Overview</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/bak_1.jpg" alt="Controller PCB"/>
+                <figcaption><span>Controller PCB</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none" poster="assets/media/bak_poster.png">
+                  <source src="assets/media/bak_2.MP4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Demo</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+
+          </div>
+        </details>
+
+
+        <!-- ── P6: Robot Inspection ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Robot Inspection Library</span>
+                <span class="psum-meta">2025 · Engineer</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Laser Tracker</span>
+                <span class="tag">Kabsch SVD</span>
+                <span class="tag">Industrial Manipulators</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">Evaluating industrial robot accuracy and repeatability is a labor-intensive manual process with no standard tools</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Python library with ISO 9283 metrics, Kabsch SVD for coordinate alignment, automated testing, and standardized reporting</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Reusable tools for testing, metrics, and consistent reports; documentation via MkDocs Material</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Designed the application architecture for data analysis with required precision and flexibility</li>
+              <li>Developed a Python tool for processing measurements and generating reports</li>
+              <li>Created a test motion program for the manipulator</li>
+              <li>Designed mounts for laser tracker marker installation</li>
+              <li>Prepared a report on manipulator accuracy research results</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/mook003/robot-inspection" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                GitHub
+              </a>
+              <a href="https://mook003.github.io/robot-inspection/" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                Documentation
+              </a>
+            </div>
+          </div>
+        </details>
+
+        <!-- ── P5: Cart-Pole ── -->
+        <details class="project-card">
+          <summary class="project-summary">
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Plug-n-Play Inverted Pendulum</span>
+                <span class="psum-meta">2025 · Team Lead</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag tag-accent">Control Theory</span>
+                <span class="tag tag-accent">MuJoCo</span>
+                <span class="tag tag-accent">PCB Design</span>
+                <span class="tag">CAN/UART/I2C</span>
+                <span class="tag">RL</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="project-body">
+            <div class="project-story">
+              <div class="story-block">
+                <div class="story-label">Problem</div>
+                <div class="story-text">A laboratory inverted pendulum (cart-pole) needs a convenient software platform for experimenting with different control algorithms</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Solution</div>
+                <div class="story-text">Plug-n-play system with 1.2 kHz control software, MuJoCo simulation, custom PCB, and support for both classical and RL control</div>
+              </div>
+              <div class="story-block">
+                <div class="story-label">Result</div>
+                <div class="story-text">Defended with top grade; 1.2 kHz control loop; tested classical and RL control strategies</div>
+              </div>
+            </div>
+
+            <div class="project-section-title">My contributions</div>
+            <ul class="contrib-list">
+              <li>Restored the hardware: replaced damaged components and serviced the mechanics</li>
+              <li>Designed and fabricated an ESP32-based control board</li>
+              <li>Architected a Python package and implemented the communication layer between PC and pendulum control board</li>
+              <li>Built a digital twin of the pendulum using MJCF description files and MuJoCo simulator</li>
+            </ul>
+
+            <div class="project-links">
+              <a href="https://github.com/Innopolis-Robotics-Society/total_control" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </details>
+
+
+        <!-- ── Mini-projects ── -->
+        <div class="project-section-title" style="margin-top:24px;">Side projects</div>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <a href="https://t.me/universityinnopolis/2744" target="_blank" rel="noreferrer">Robot Musicians for Digital Innopolis Days</a>
+            <p>Interactive robotics demo at a university event</p>
+          </div>
+          <div class="mini-card">
+            <a href="https://github.com/mook003/Clubfest-IU-2024" target="_blank" rel="noreferrer">Interactive Robot Arm at ClubFest</a>
+            <p>Innopolis University club festival — interactive demo for students</p>
+          </div>
+          <div class="mini-card">
+            <a href="https://github.com/mook003/rl_local_planner" target="_blank" rel="noreferrer">Custom Nav2 Local Planner</a>
+            <p>Based on DWB controller for ROS 2 Humble</p>
+          </div>
+          <div class="mini-card">
+            <a href="https://drive.google.com/drive/folders/1lmaHMeEl5tqQrEJ4E6Z5g5qiDUo-QCet" target="_blank" rel="noreferrer">Custom Band-Pass Filter</a>
+            <p>Designed and fabricated entirely from scratch</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- LEADERSHIP -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="leadership">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Leadership &amp; Mentoring</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <details class="exp-card">
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Robotics Lab Lead</span>
+                <span class="psum-meta">2024–present</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">80+ members</span>
+                <span class="tag">20+ projects</span>
+                <span class="tag">Internships</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p>Student laboratory at the Innopolis University Robotics Institute.</p>
+            <ul>
+              <li>80+ undergraduate, master's, and PhD students engaged</li>
+              <li>Upgraded and expanded the lab equipment</li>
+              <li>Internship programs for students from multiple universities</li>
+              <li>20+ projects and startups launched from the lab</li>
+              <li>Hands-on lab sessions for 10 courses + workshops</li>
+            </ul>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/lab_2.jpg" alt="Frequency filter experiments"/>
+                <figcaption><span>Frequency filter design</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/lab_1.jpg" alt="Cart pole setup"/>
+                <figcaption><span>Cart Pole development</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/lab_0.jpg" alt="Keychains for applicants"/>
+                <figcaption><span>Keychains for applicants</span><span class="badge">photo</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <details class="exp-card">
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Head of Innopolis Robotics Society</span>
+                <span class="psum-meta">2024–present</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">2200+ people</span>
+                <span class="tag">Top-10 clubs</span>
+                <span class="tag">Competitions</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p>Robotics community for engaging students in research, projects, and competitions.</p>
+            <ul>
+              <li>2,200+ people reached through club events</li>
+              <li>2 engineering fairs, Club Fest, 13+ workshops</li>
+              <li>20-person student team for an industrial project with the Robotics Center</li>
+              <li>Wins: Russian Robot Programming Championship, MTS True Tech, RoboCode</li>
+            </ul>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/iros_0.JPG" alt="UR10e interactive demo"/>
+                <figcaption><span>UR10e interactive demo</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/iros_1.JPG" alt="Club league red carpet"/>
+                <figcaption><span>Club League</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <video class="media" controls preload="none">
+                  <source src="assets/media/iros_2.mp4" type="video/mp4"/>
+                </video>
+                <figcaption><span>Report</span><span class="badge">video</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <details class="exp-card">
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Teaching Assistant — Sensors &amp; Sensing</span>
+                <span class="psum-meta">2026</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">ROS 2</span>
+                <span class="tag">IMU</span>
+                <span class="tag">LiDAR</span>
+                <span class="tag">Livox MID-70</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p>A 3rd-year course covering sensor theory, data processing, and hands-on labs.</p>
+            <ul>
+              <li>Added a new introductory ROS 2 lab</li>
+              <li>Migrated the IMU lab to ROS 2 + Raspberry Pi 5</li>
+              <li>Migrated the LiDAR lab to Livox Mid-70 (RANSAC, ICP) on ROS 2</li>
+              <li>Graded student reports and code</li>
+            </ul>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/sns_1.jpeg" alt="IMU lab session"/>
+                <figcaption><span>IMU lab session</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/sns_2.jpeg" alt="RANSAC"/>
+                <figcaption><span>RANSAC result</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/sns_3.png" alt="ROS 2 lab"/>
+                <figcaption><span>ROS 2 basics</span><span class="badge">photo</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+
+        <details class="exp-card">
+          <summary>
+            <div class="psum-left">
+              <div class="psum-top">
+                <span class="psum-name">Youth Engineering Teams</span>
+                <span class="psum-meta">2025</span>
+              </div>
+              <div class="psum-tags">
+                <span class="tag">5 teams × 6 people</span>
+                <span class="tag">UAV</span>
+                <span class="tag">Mentoring</span>
+              </div>
+            </div>
+            <span class="psum-chevron">&#9662;</span>
+          </summary>
+          <div class="exp-body">
+            <p>"UAV Workforce" federal program (University 2035) — mentoring teams developing UAV solutions for industry clients.</p>
+            <ul>
+              <li>Negotiated and agreed on specs with clients</li>
+              <li>Recruited, selected, and trained participants</li>
+              <li>5 teams successfully defended their solutions: simulation, automated droneport landing, autonomous navigation, dynamic obstacle avoidance</li>
+            </ul>
+
+            <div class="gallery">
+              <figure>
+                <img class="media" src="assets/media/mik_1.jpeg" alt="Fluid level sensor team"/>
+                <figcaption><span>Fluid level sensor</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/mik_2.jpeg" alt="3D drone navigation"/>
+                <figcaption><span>3D drone navigation</span><span class="badge">photo</span></figcaption>
+              </figure>
+              <figure>
+                <img class="media" src="assets/media/mik_3.png" alt="VTol landing algorithm"/>
+                <figcaption><span>VTol landing algorithm</span><span class="badge">photo</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SKILLS -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="skills">
+        <div class="section-head">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Skills</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-group">
+            <div class="skill-group-title">Robotics</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">ROS2</span>
+              <span class="skill-tag">Nav2</span>
+              <span class="skill-tag">MoveIt</span>
+              <span class="skill-tag">tf2</span>
+              <span class="skill-tag">URDF/Xacro</span>
+              <span class="skill-tag">Behavior Trees</span>
+              <span class="skill-tag">SLAM</span>
+              <span class="skill-tag">Sensor Fusion</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Simulation</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">Gazebo</span>
+              <span class="skill-tag">MuJoCo</span>
+              <span class="skill-tag">Unity</span>
+              <span class="skill-tag">RViz2</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Infrastructure</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">docker-compose</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub Actions</span>
+              <span class="skill-tag">tmux</span>
+              <span class="skill-tag">ssh</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Hardware / Embedded</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">STM32</span>
+              <span class="skill-tag">ESP32</span>
+              <span class="skill-tag">CAN</span>
+              <span class="skill-tag">UART</span>
+              <span class="skill-tag">PWM</span>
+              <span class="skill-tag">PCB Design</span>
+              <span class="skill-tag">EasyEDA</span>
+              <span class="skill-tag">3D Print</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">CAD / Manufacturing</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">Siemens NX</span>
+              <span class="skill-tag">Fusion 360</span>
+              <span class="skill-tag">Kompas 3D</span>
+              <span class="skill-tag">Orca Slicer</span>
+              <span class="skill-tag">PreForm</span>
+              <span class="skill-tag">FlatCAM</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">CV / ML</div>
+            <div class="skill-group-items">
+              <span class="skill-tag">OpenCV</span>
+              <span class="skill-tag">YOLO</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">ONNX</span>
+              <span class="skill-tag">TensorRT</span>
+              <span class="skill-tag">AprilTag</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- EDUCATION & AWARDS -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="education">
+        <div class="section-head">
+          <span class="section-num">05</span>
+          <h2 class="section-title">Education &amp; Awards</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-title">Innopolis University</div>
+          <div class="edu-sub">2023–2027 · B.Sc. in Computer Science and Engineering</div>
+          <div class="edu-detail">
+            Robotics specialization. GPA <strong>4.73</strong>
+          </div>
+        </div>
+
+        <div class="awards-list">
+          <div class="award-item">
+            <span class="award-year">2026</span>
+            <span class="award-text"><strong>Student of the Year</strong> at Innopolis University — triple nomination: Science, Social Activity, and Sports</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2026</span>
+            <span class="award-text"><a href="https://drive.google.com/drive/folders/1lmaHMeEl5tqQrEJ4E6Z5g5qiDUo-QCet" target="_blank" rel="noreferrer"><strong>Interview</strong> Evgenii Shlomov: "Innopolis University — a unique place to study robotics"</a></span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2025</span>
+            <span class="award-text"><strong>Student of the Year</strong> at Innopolis University — dual nomination: Science and Social Activity</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2025</span>
+            <span class="award-text"><strong>Award laureate</strong> for outstanding contribution to student life — "In Search of El Dorado of the Year"</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2024</span>
+            <span class="award-text"><strong>2nd place</strong> MTS True Tech Champ — Robot Programming track</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2024</span>
+            <span class="award-text"><strong>Speaker</strong> at the pedagogical forum "Sports and Educational Robotics in Russia"</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2025</span>
+            <span class="award-text"><strong>Organizer</strong> of technical staff at the Regional and Final stages of the Russian Olympiad in Robotics</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2023–2025</span>
+            <span class="award-text"><strong>Ambassador</strong> of Innopolis University · Freshman mentor (2024)</span>
+          </div>
+          <div class="award-item">
+            <span class="award-year">2024</span>
+            <span class="award-text"><strong>Mentor</strong> for 1st-year students</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="footer">
+      <div style="margin-bottom: 8px;">
+        <a href="mailto:e.shlomov@innopolis.university">Email</a> &nbsp;·&nbsp;
+        <a href="https://t.me/mook003" target="_blank" rel="noreferrer">Telegram</a> &nbsp;·&nbsp;
+        <a href="https://github.com/mook003" target="_blank" rel="noreferrer">GitHub</a> &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/evgenii-shlomov" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      &copy; 2026 Evgenii Shlomov
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('theme-icon').innerHTML = isDark ? '&#9789;' : '&#9788;';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-icon').innerHTML = '&#9788;';
+      }
+    })();
+  </script>
+</body>
+</html>
